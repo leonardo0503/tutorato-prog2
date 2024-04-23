@@ -43,7 +43,7 @@ int main(int argc, char**argv){
     //inizializzo varabili per verificare il numero di domande
     int count=0;
     string line;
-    //apertura del file per contare il nuemro di righe
+    //apertura e verifica del file per contare il numero di righe
     ifstream infile("milionario.txt");
     if(!infile.is_open()){
         cerr << "errore nell'apertura del file"<< endl;
@@ -52,10 +52,11 @@ int main(int argc, char**argv){
     while(getline(infile,line)){
         count++;
     }
+    //calcolo numero domande in base alle righe
     count=count/6;
     infile.close();
     
-    //apertura del file per la lettura delle domande
+    //apertura e verifica del file per la lettura delle domande
     ifstream file("milionario.txt");
     if(!file.is_open()){
         cerr << "errore nellapertura del file"<<endl;
@@ -80,18 +81,19 @@ int main(int argc, char**argv){
 
         //constructor for question
         domanda domanda_1(question,risposta1,risposta2,risposta3,risposta4,correct);
-
+        //lettura delle domande
         domanda_1.leggi_testo();
         int guess;
         cin >> guess;
-        
+        //verifica delle risposte
         if(domanda_1.verifica(guess)){
             corrette++;
         }
     }
+    //calcolo percentuale
     float percentuale=0;
     percentuale =(corrette*100)/count;
-    
+    //stampa punteggio
     cout<<"hai totalizzato il "<<percentuale<<"%"<<endl;
     
     file.close();
